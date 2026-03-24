@@ -1,4 +1,4 @@
-﻿namespace PeopleVille
+﻿namespace PeopleVille.Equipment
 {
     interface IEquipment
     {
