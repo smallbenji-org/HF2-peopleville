@@ -6,6 +6,7 @@ classDiagram
         +void Unequip()
     }
     Food ..|> IEquipment
+    Gun ..|> IEquipment
 
     class Person{
         <<abstract>>
