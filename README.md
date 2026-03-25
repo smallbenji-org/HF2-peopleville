@@ -101,6 +101,16 @@ classDiagram
         +Task StartClock()
     }
 
+    class RNG {
+        +int ThrowDice()
+        +int Range()
+    }
+
+    class Die {
+        +int Sides
+    }
+    RNG --|> Die
+
     Gun ..|> IEquipment
     Food ..|> IEquipment
     
