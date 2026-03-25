@@ -43,11 +43,13 @@ classDiagram
     class Food{
         +string Name
         +int HealthPoints
+        +Consume()
     }
 
     class Gun{
         +string Name
         +int Damage
+        +Shoot()
     }
 
     class Store{
