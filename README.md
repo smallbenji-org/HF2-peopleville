@@ -15,6 +15,7 @@ classDiagram
         <<interface>>
         +void Equip()
         +void Unequip()
+        +void Use()
     }
     Food ..|> IEquipment
     Gun ..|> IEquipment
@@ -54,13 +55,13 @@ classDiagram
     class Food{
         +string Name
         +int HealthPoints
-        +Consume()
+        +Use()
     }
 
     class Gun{
         +string Name
         +int Damage
-        +Shoot()
+        +Use()
     }
 
     class Store{
