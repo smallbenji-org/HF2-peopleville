@@ -6,7 +6,6 @@ namespace PeopleVille.Persons
     {
         public string Name { get; set; }
         public int Health { get; set; }
-        // TODO: Tilføj inventory når Equipment er oprettet
         public List<IEquipment> Inventory { get; set; }
         public object Location { get; set; }
         public int Money { get; set; }
