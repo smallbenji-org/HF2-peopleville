@@ -27,12 +27,13 @@ classDiagram
         +Person BuildCitizens()
     }
 
-    class ITownBuilder
+    class ITownBuilder {
         <<interface>>
         +ITownBuilder AddGunStore()
         +ITownBuilder AddEggStore()
         +ITownBuilder AddBank()
         +List~Location~ BuildTown();
+    }
 
     class Gun {
         +string Name
