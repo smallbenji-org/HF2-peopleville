@@ -1,75 +1,137 @@
 ﻿using PeopleVille.Equipment;
 using PeopleVille.Locations;
 using PeopleVille.Persons;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static PeopleVille.WorldBuilder.WorldInterfaces;
-
+using PeopleVille;
+using System.Reflection;
 namespace PeopleVille.WorldBuilder
 {
-    public class CitizenBuilder : ICitizenBuilder
+    public class WorldBuilder :
+        IWorldBuilder,
+        IGameManagerBuilder,
+        IEquipmentBuilder,
+        ILocationBuilder,
+        IPersonBuilder
     {
-        Person person;
-        List<Person> Citizens = new List<Person>();
+        private World world;
 
-        public ICitizenBuilder CreateAdult(string name, int health)
+        public IGameManagerBuilder AddGameManager()
         {
-            person = new AdultCitizen { Name = name, Health = health, Inventory = new List<IEquipment>() };
-            Citizens.Add(person);
+            world = new World();
             return this;
         }
 
-        public ICitizenBuilder CreateChild(string name, int health)
+        IEquipmentBuilder IGameManagerBuilder.AddEquipment()
         {
-            person = new ChildCitizen { Name = name, Health = health, Inventory = new List<IEquipment>() };
-            Citizens.Add(person);
             return this;
         }
 
-        public ICitizenBuilder WithGun(string name, int damage)
+        ILocationBuilder IEquipmentBuilder.AddLocations()
         {
-            person.Inventory.Add(new Gun { Name = name, Damage = damage });
             return this;
         }
 
-        public ICitizenBuilder WithFood(string name, int healthPoints)
+        IPersonBuilder ILocationBuilder.AddPersons()
         {
-            person.Inventory.Add(new Food { Name = name, HealthPoints = healthPoints });
             return this;
         }
 
-        public List<Person> BuildCitizens()
+        IWorldBuilder IPersonBuilder.EndWorldBuilding()
         {
-            return Citizens;
-        }
-    }
-
-    public class TownBuilder : ITownBuilder
-    {
-        List<Location> locations = new List<Location>();
-
-        public ITownBuilder AddGunStore(string name)
-        {
-            locations.Add(new GunStore { Name = name, Inventory = new Dictionary<object, int>() });
             return this;
         }
 
-        public ITownBuilder AddEggStore(string name)
+        IEquipmentBuilder IEquipmentBuilder.FromRange(IEnumerable<IEquipment> equipment)
         {
-            locations.Add(new EggStore { Name = name, Inventory = new Dictionary<object, int>() });
+            world.Equipment.AddRange(equipment);
             return this;
         }
 
-        public ITownBuilder AddBank(string name)
+        ILocationBuilder ILocationBuilder.FromRange(IEnumerable<Location> locations)
         {
-            locations.Add(new Bank { Name = name });
+            world.Locations.AddRange(locations);
             return this;
         }
 
-        public List<Location> BuildTown()
+        IPersonBuilder IPersonBuilder.FromRange(IEnumerable<Person> people)
         {
-            return locations;
+            world.People.AddRange(people);
+            return this;
+        }
+
+        World IWorldBuilder.Build()
+        {
+            return world;
+        }
+
+        ILocationBuilder ILocationBuilder.FromFile(string pathToFile)
+        {
+            world.Locations.AddRange(LoadTypesFromAssembly<Location>(pathToFile));
+            return this;
+        }
+
+        IPersonBuilder IPersonBuilder.FromFile(string pathToFile)
+        {
+            world.People.AddRange(LoadTypesFromAssembly<Person>(pathToFile));
+            return this;
+        }
+
+        IEquipmentBuilder IEquipmentBuilder.FromFile(string pathToFile)
+        {
+            world.Equipment.AddRange(LoadTypesFromAssembly<IEquipment>(pathToFile));
+            return this;
+        }
+
+        IEquipmentBuilder IEquipmentBuilder.FromFolder(string pathToFolder)
+        {
+            world.Equipment.AddRange(LoadTypesFromAssemblyFolder<IEquipment>(pathToFolder));
+            return this;
+        }
+
+        ILocationBuilder ILocationBuilder.FromFolder(string pathToFolder)
+        {
+            world.Locations.AddRange(LoadTypesFromAssemblyFolder<Location>(pathToFolder));
+            return this;
+        }
+
+        IPersonBuilder IPersonBuilder.FromFolder(string pathToFolder)
+        {
+            world.People.AddRange(LoadTypesFromAssemblyFolder<Person>(pathToFolder));
+            return this;
+        }
+
+        private List<T> LoadTypesFromAssemblyFolder<T>(string pathToAssemblyFolder) where T : class
+        {
+            var instances = new List<T>();
+            string[] dlls = Directory.GetFiles(pathToAssemblyFolder, "*.dll");
+
+            foreach (var dll in dlls)
+            {
+                instances.AddRange(LoadTypesFromAssembly<T>(dll));
+            }
+
+            return instances;
+        }
+
+        private List<T> LoadTypesFromAssembly<T>(string pathToAssembly) where T : class
+        {
+            var instances = new List<T>();
+
+            Assembly assembly = Assembly.LoadFrom(pathToAssembly);
+
+
+            var types = assembly.GetTypes().Where(t =>
+                typeof(T).IsAssignableFrom(t) &&
+                !t.IsInterface &&
+                !t.IsAbstract
+            );
+
+            foreach (var type in types)
+            {
+                var instance = Activator.CreateInstance(type) as T;
+                if (instance != null) instances.Add(instance);
+            }
+
+            return instances;
         }
     }
 }
