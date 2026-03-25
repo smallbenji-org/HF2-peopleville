@@ -4,17 +4,15 @@ namespace PeopleVille
 {
     public class GameManager
     {
-        List<Store> Stores { get; set; }
+        public delegate void TickHandler();
+
+        public event TickHandler TickDone;
 
         public async Task StartClock()
         {
-            var res = 0;
-
             while (true)
             {
-                Console.WriteLine($"{res}");
-                res++;
-                // Do something
+                TickDone.Invoke();
                 await Task.Delay(500);
             }
         }
