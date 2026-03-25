@@ -2,8 +2,9 @@
 
 ## TODO
 ### Benjamin
-- [ ] Implementer dynamisk import af "eksterne" dll'er
-- [ ] Find ud af hvordan tid skal fungere
+- [x] Implementer dynamisk import af "eksterne" dll'er
+- [x] Find ud af hvordan tid skal fungere
+- [ ] Lav ny data så program kan køre
 ### Mikkel
 - [ ] Opret logik DoSomething()
 - [ ] Lav worldbuilder
@@ -114,7 +115,7 @@ classDiagram
 
     Gun ..|> IEquipment
     Food ..|> IEquipment
-    
+
     AdultCitizen --|> Person
     ChildCitizen --|> Person
     Person o-- IEquipment
