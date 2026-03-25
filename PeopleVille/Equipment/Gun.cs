@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PeopleVille.Person;
 
 namespace PeopleVille.Equipment
 {
@@ -11,12 +9,18 @@ namespace PeopleVille.Equipment
 
         public void Equip()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("");
         }
 
         public void Unequip()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("");
+        }
+
+        public void Shoot(Person.Person target)
+        {
+            target.Health -= this.Damage;
+            Console.WriteLine($"");
         }
     }
 }
