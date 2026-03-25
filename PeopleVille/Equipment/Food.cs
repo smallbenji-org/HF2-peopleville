@@ -1,4 +1,4 @@
-﻿using PeopleVille.Person;
+﻿using PeopleVille.Persons;
 
 namespace PeopleVille.Equipment
 {
@@ -17,7 +17,7 @@ namespace PeopleVille.Equipment
             Console.WriteLine("");
         }
 
-        public void Consume(Person.Person person)
+        public void Use(Person person)
         {
             person.Health += HealthPoints;
             Console.WriteLine($"");

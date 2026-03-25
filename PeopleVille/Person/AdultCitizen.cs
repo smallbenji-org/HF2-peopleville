@@ -1,4 +1,4 @@
-namespace PeopleVille.Person
+namespace PeopleVille.Persons
 {
     public class AdultCitizen : Person
     {

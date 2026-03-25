@@ -1,4 +1,4 @@
-namespace PeopleVille.Person
+namespace PeopleVille.Persons
 {
     public abstract class Person
     {

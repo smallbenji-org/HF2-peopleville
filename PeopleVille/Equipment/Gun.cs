@@ -1,4 +1,4 @@
-﻿using PeopleVille.Person;
+﻿using PeopleVille.Persons;
 
 namespace PeopleVille.Equipment
 {
@@ -17,7 +17,7 @@ namespace PeopleVille.Equipment
             Console.WriteLine("");
         }
 
-        public void Shoot(Person.Person target)
+        public void Use(Person target)
         {
             target.Health -= this.Damage;
             Console.WriteLine($"");
