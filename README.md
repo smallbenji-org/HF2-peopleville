@@ -11,73 +11,91 @@
 
 ```mermaid
 classDiagram
-    class IEquipment{
+    class IEquipment {
         <<interface>>
         +void Equip()
         +void Unequip()
         +void Use()
     }
-    Food ..|> IEquipment
-    Gun ..|> IEquipment
 
-    class Person{
+    class ICitizenBuilder {
+        <<interface>>
+        +ICitizenBuilder CreateAdult()
+        +ICitizenBuilder CreateChild()
+        +ICitizenBuilder WithGun()
+        +ICitizenBuilder WithFood()
+        +Person BuildCitizens()
+    }
+
+    class Gun {
+        +string Name
+        +int Damage
+        +void Use()
+    }
+    class Food {
+        +string Name
+        +int HealthPoints
+        +void Use()
+    }
+
+    class Person {
         <<abstract>>
         +string Name
         +int Health
-        +List~Equipment~ Inventory
-        +Location Location
-        +int Money
-        +int Age
-        +void Walk()
+        +List~IEquipment~ Inventory
     }
-    AdultCitizen --|> Person
-    ChildCitizen --|> Person
-    IEquipment ..|> Person
 
     class AdultCitizen{
-    }
-    class ChildCitizen{
+
     }
 
-    class Location{
+    class ChildCitizen{
+
+    }
+
+    class Location {
         <<abstract>>
         +string Name
     }
+    class Store {
+        +Dictionary~object, int~ Inventory
+    }
+
+    class Bank{
+
+    }
+
+    class GunStore{
+
+    }
+
+    class EggStore{
+
+    }
+
+    class CitizenBuilder{
+
+    }
+
+    class GameManager {
+        -List~Store~ Stores
+        +Task StartClock()
+    }
+
+    Gun ..|> IEquipment
+    Food ..|> IEquipment
+    
+    AdultCitizen --|> Person
+    ChildCitizen --|> Person
+    Person o-- IEquipment
+
     Bank --|> Location
     Store --|> Location
-    Person ..|> Location
-
-    class Logger{
-        <<singleton>>
-        +void Log()
-    }
-
-    class Food{
-        +string Name
-        +int HealthPoints
-        +Use()
-    }
-
-    class Gun{
-        +string Name
-        +int Damage
-        +Use()
-    }
-
-    class Store{
-        +Dictionary~IEquipment int~ Inventory
-    }
     GunStore --|> Store
     EggStore --|> Store
-    IEquipment --|> Store
 
-    class SimulationManager{
-        +void StartSim()
-        +List~Equipment~ Equipment
-        +List~Location~ Locations
-    }
-    IEquipment ..|> SimulationManager
-    Person ..|> SimulationManager
-    Location ..|> SimulationManager
+    CitizenBuilder ..|> ICitizenBuilder
+    CitizenBuilder --> Person
+    GameManager --> Store
 
 ```
