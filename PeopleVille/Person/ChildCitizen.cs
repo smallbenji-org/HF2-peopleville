@@ -4,7 +4,7 @@ namespace PeopleVille.Persons
     {
         public ChildCitizen()
         {
-            Age = 14;
+            Age = RNG.Range(2, 19);
         }
     }
 }
