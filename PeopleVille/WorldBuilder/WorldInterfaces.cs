@@ -24,7 +24,7 @@ namespace PeopleVille.WorldBuilder
             ICitizenBuilder CreateChild(string name, int health);
             ICitizenBuilder WithGun(string name, int damage);
             ICitizenBuilder WithFood(string name, int healthPoints);
-            Person BuildCitizens();
+            List<Person> BuildCitizens();
         }
     }
 }

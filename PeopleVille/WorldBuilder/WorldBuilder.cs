@@ -39,9 +39,9 @@ namespace PeopleVille.WorldBuilder
             return this;
         }
 
-        public Person BuildCitizens()
+        public List<Person> BuildCitizens()
         {
-            return person;
+            return Citizens;
         }
     }
 
