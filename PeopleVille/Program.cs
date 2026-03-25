@@ -2,10 +2,11 @@
 using PeopleVille.Equipment;
 using PeopleVille.Persons;
 using PeopleVille.WorldBuilder;
+using System.Text.Json;
 
 var gameManager = new GameManager();
 
-await gameManager.StartClock();
+//await gameManager.StartClock();
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
@@ -15,7 +16,6 @@ Console.WriteLine("Hello, World!");
 var testCitizen = new AdultCitizen { Name = "Lars", Health = 100 };
 testCitizen.Inventory.Add(new Gun { Name = "Glock", Damage = 50 }); */
 
-/* builders? byggemand-bob reference?
 var cBuilder = new CitizenBuilder();
 var tBuilder = new TownBuilder();
 
@@ -30,4 +30,14 @@ tBuilder
     .AddEggStore("Egg Store");
 
 var borgere = cBuilder.BuildCitizens();
-var locations = tBuilder.BuildTown(); */
+
+if (borgere[0].Inventory[0] is Gun)
+{
+    var gun = (Gun)borgere[0].Inventory[0];
+    gun.Damage = 100;
+}
+var locations = tBuilder.BuildTown();
+
+Console.WriteLine(borgere);
+
+//Console.WriteLine(JsonSerializer.Serialize(borgere));
