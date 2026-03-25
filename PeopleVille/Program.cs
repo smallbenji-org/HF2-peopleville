@@ -12,15 +12,22 @@ Console.WriteLine("Hello, World!");
 
 
 /* burde i teorien virke?
-var testCitizen = new AdultCitizen { Name = "", Health = 100 };
+var testCitizen = new AdultCitizen { Name = "Lars", Health = 100 };
 testCitizen.Inventory.Add(new Gun { Name = "Glock", Damage = 50 }); */
 
-/* builder?
-var builder = new CitizenBuilder();
+/* builders? byggemand-bob reference?
+var cBuilder = new CitizenBuilder();
+var tBuilder = new TownBuilder();
 
-builder
+cBuilder
     .CreateAdult("Lars", 100).WithGun("Glock", 20)
     .CreateAdult("Thomas", 100).WithGun("AK", 40).WithFood("Hvid Monster", 0)
     .CreateChild("Troels", 60).WithFood("Apple", 10);
 
-var borgere = builder.Build(); */
+tBuilder
+    .AddBank("PeopleVille Bank")
+    .AddGunStore("Gun Store")
+    .AddEggStore("Egg Store");
+
+var borgere = cBuilder.BuildCitizens();
+var locations = tBuilder.BuildTown(); */

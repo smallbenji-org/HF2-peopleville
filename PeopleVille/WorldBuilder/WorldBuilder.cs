@@ -1,4 +1,5 @@
 ﻿using PeopleVille.Equipment;
+using PeopleVille.Locations;
 using PeopleVille.Persons;
 using System;
 using System.Collections.Generic;
@@ -38,9 +39,37 @@ namespace PeopleVille.WorldBuilder
             return this;
         }
 
-        public Person Build()
+        public Person BuildCitizens()
         {
             return person;
+        }
+    }
+
+    public class TownBuilder : ITownBuilder
+    {
+        List<Location> locations = new List<Location>();
+
+        public ITownBuilder AddGunStore(string name)
+        {
+            locations.Add(new GunStore { Name = name, Inventory = new Dictionary<object, int>() });
+            return this;
+        }
+
+        public ITownBuilder AddEggStore(string name)
+        {
+            locations.Add(new EggStore { Name = name, Inventory = new Dictionary<object, int>() });
+            return this;
+        }
+
+        public ITownBuilder AddBank(string name)
+        {
+            locations.Add(new Bank { Name = name });
+            return this;
+        }
+
+        public List<Location> BuildTown()
+        {
+            return locations;
         }
     }
 }

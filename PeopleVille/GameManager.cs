@@ -1,4 +1,4 @@
-using PeopleVille.Location;
+using PeopleVille.Locations;
 
 namespace PeopleVille
 {

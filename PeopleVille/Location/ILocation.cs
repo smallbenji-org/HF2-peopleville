@@ -1,4 +1,4 @@
-namespace PeopleVille.Location
+namespace PeopleVille.Locations
 {
     public abstract class Location
     {

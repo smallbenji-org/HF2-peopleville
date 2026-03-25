@@ -1,4 +1,5 @@
-﻿using PeopleVille.Persons;
+﻿using PeopleVille.Locations;
+using PeopleVille.Persons;
 
 namespace PeopleVille.WorldBuilder
 {
@@ -11,7 +12,10 @@ namespace PeopleVille.WorldBuilder
 
         public interface ITownBuilder
         {
-
+            ITownBuilder AddGunStore(string name);
+            ITownBuilder AddEggStore(string name);
+            ITownBuilder AddBank(string name);
+            List<Location> BuildTown();
         }
 
         public interface ICitizenBuilder
@@ -20,7 +24,7 @@ namespace PeopleVille.WorldBuilder
             ICitizenBuilder CreateChild(string name, int health);
             ICitizenBuilder WithGun(string name, int damage);
             ICitizenBuilder WithFood(string name, int healthPoints);
-            Person Build();
+            Person BuildCitizens();
         }
     }
 }
