@@ -20,7 +20,7 @@ namespace PeopleVille.Equipment
         public void Use(Person target)
         {
             target.Health -= this.Damage;
-            Console.WriteLine($"");
+            Console.WriteLine($"{target.Name} has been shot and took {Damage}");
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PeopleVille.Equipment
         public void Use(Person person)
         {
             person.Health += HealthPoints;
-            Console.WriteLine($"");
+            Console.WriteLine($"{person} ate food and healed {HealthPoints}");
             person.Inventory.Remove(this);
         }
     }
