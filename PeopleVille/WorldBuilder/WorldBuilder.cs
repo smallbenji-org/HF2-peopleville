@@ -15,14 +15,14 @@ namespace PeopleVille.WorldBuilder
 
         public ICitizenBuilder CreateAdult(string name, int health)
         {
-            person = new AdultCitizen { Name = name, Health = health, Inventory = new List<Equipment.IEquipment>() };
+            person = new AdultCitizen { Name = name, Health = health, Inventory = new List<IEquipment>() };
             Citizens.Add(person);
             return this;
         }
 
         public ICitizenBuilder CreateChild(string name, int health)
         {
-            person = new ChildCitizen { Name = name, Health = health, Inventory = new List<Equipment.IEquipment>() };
+            person = new ChildCitizen { Name = name, Health = health, Inventory = new List<IEquipment>() };
             Citizens.Add(person);
             return this;
         }
