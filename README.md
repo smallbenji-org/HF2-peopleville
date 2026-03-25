@@ -27,6 +27,13 @@ classDiagram
         +Person BuildCitizens()
     }
 
+    class ITownBuilder
+        <<interface>>
+        +ITownBuilder AddGunStore()
+        +ITownBuilder AddEggStore()
+        +ITownBuilder AddBank()
+        +List~Location~ BuildTown();
+
     class Gun {
         +string Name
         +int Damage
@@ -74,7 +81,18 @@ classDiagram
     }
 
     class CitizenBuilder{
+        +ICitizenBuilder CreateAdult()
+        +ICitizenBuilder CreateChild()
+        +ICitizenBuilder WithGun()
+        +ICitizenBuilder WithFood()
+        +Person BuildCitizens()
+    }
 
+    class TownBuilder {
+        +ITownBuilder AddGunStore()
+        +ITownBuilder AddEggStore()
+        +ITownBuilder AddBank()
+        +List~Location~ BuildTown()
     }
 
     class GameManager {
@@ -95,7 +113,9 @@ classDiagram
     EggStore --|> Store
 
     CitizenBuilder ..|> ICitizenBuilder
+    TownBuilder ..|> ITownBuilder
     CitizenBuilder --> Person
+    TownBuilder --> Location
     GameManager --> Store
 
 ```
