@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "prepare",
+            "program": "${workspaceFolder}/PeopleVille/bin/Debug/net10.0/PeopleVille.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/PeopleVille",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
