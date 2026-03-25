@@ -5,6 +5,7 @@
 - [ ] Implementer dynamisk import af "eksterne" dll'er
 - [ ] Find ud af hvordan tid skal fungere
 ### Mikkel
+- [ ] Fix equipment
 - [ ] Lav worldbuilder
 
 **Husk at opdatere mermaid løbende**
