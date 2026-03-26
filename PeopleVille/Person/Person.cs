@@ -26,6 +26,7 @@ namespace PeopleVille.Persons
         public void Walk(Location newLocation)
         {
             this.CurrentLocation = newLocation;
+            newLocation.UseLocation(this);
         }
     }
 }
