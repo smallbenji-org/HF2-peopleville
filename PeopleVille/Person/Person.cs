@@ -16,6 +16,7 @@ namespace PeopleVille.Persons
         public int Age { get; set; }
         public Location CurrentLocation { get; set; }
 
+        public GameManager Manager { get; set; }
 
         public void Walk(Location newLocation)
         {

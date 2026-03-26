@@ -4,11 +4,11 @@ namespace PeopleVille.Persons
 {
     public class AdultCitizen : Person
     {
-        public AdultCitizen(GameManager gameManager)
+        public AdultCitizen()
         {
             Age = RNG.Range(20, 85);
 
-            gameManager.TickDone += DoSomething;
+            Manager.TickDone += DoSomething;
         }
 
         public void DoSomething()

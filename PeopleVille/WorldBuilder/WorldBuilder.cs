@@ -60,6 +60,11 @@ namespace PeopleVille.WorldBuilder
 
         World IWorldBuilder.Build()
         {
+            foreach (var person in world.People)
+            {
+                person.Manager = world.manager;
+            }
+
             return world;
         }
 
