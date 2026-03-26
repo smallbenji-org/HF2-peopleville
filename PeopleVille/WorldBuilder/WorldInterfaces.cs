@@ -36,6 +36,7 @@ namespace PeopleVille.WorldBuilder
         IPersonBuilder FromFolder(string pathToFolder);
         IPersonBuilder FromFile(string pathToFile);
         IPersonBuilder FromRange(IEnumerable<Person> people);
+        IPersonBuilder WithRandomItems(int number);
         IWorldBuilder EndWorldBuilding();
     }
 

@@ -17,33 +17,54 @@ namespace PeopleVille.Persons
 
         public void DoSomething()
         {
-            // 50/50 om vi gør noget eller ej
-            if (RNG.ThrowDice(Dices.D2) == 1)
+            if (this.Health <= 0 && !Dead)
+            {
+                this.Dead = true;
+
+                Console.WriteLine($"RIP: {this.Name} døde...");
+
                 return;
-
-            bool hasGun = Inventory.OfType<Gun>().Any();
-            bool hasUnder100 = Health < 100;
-
-            if (hasGun && hasUnder100)
-            {
-                if (RNG.ThrowDice(Dices.D2) == 1)
-                    ShootRandomPerson();
-                else
-                    EatFood();
             }
-            else if (hasGun)
+
+            // 50/50 om vi gør noget eller ej
+            if (RNG.ThrowDice(Dices.D3) == 1)
+                return;
+            switch (RNG.ThrowDice(Dices.D3))
             {
-                ShootRandomPerson();
-            }
-            else if (hasUnder100)
-            {
-                EatFood();
+                case 1:
+                    bool hasGun = Inventory.OfType<Gun>().Any();
+                    bool hasUnder100 = Health < 100;
+                    bool hasFood = Inventory.OfType<Food>().Any();
+
+                    if (hasGun && hasUnder100)
+                    {
+                        if (RNG.ThrowDice(Dices.D2) == 1)
+                            ShootRandomPerson();
+                        else
+                            if (hasFood)
+                                EatFood();
+                    }
+                    else if (hasGun)
+                    {
+                        ShootRandomPerson();
+                    }
+                    else if (hasUnder100 && hasFood)
+                    {
+                        EatFood();
+                    }
+                break;
+                case 2:
+                    //Move location
+                break;
+                case 3:
+                    //Do nothing
+                break;
             }
         }
 
         private void ShootRandomPerson()
         {
-            var targets = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation).ToList();
+            var targets = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
             if (targets.Count == 0)
                 return;
 

@@ -25,6 +25,7 @@ namespace PeopleVille
     public static class Dices
     {
         public static Die D2 = new(2);
+        public static Die D3 = new(3);
         public static Die D4 = new(4);
         public static Die D6 = new(6);
     }

@@ -140,5 +140,18 @@ namespace PeopleVille.WorldBuilder
 
             return instances;
         }
+
+        IPersonBuilder IPersonBuilder.WithRandomItems(int number)
+        {
+            foreach (var person in world.People)
+            {
+                for (var i = 0; i < number; i++)
+                {
+                    person.Inventory.Add(world.Equipment[RNG.Range(0, world.Equipment.Count)]);
+                }
+            }
+
+            return this;
+        }
     }
 }

@@ -1,13 +1,33 @@
-﻿using PeopleVille.WorldBuilder;
+﻿using PeopleVille.Equipment;
+using PeopleVille.Locations;
+using PeopleVille.Persons;
+using PeopleVille.WorldBuilder;
+
+var peopleBuilder = new PeopleBuilder();
+
+var location = new Bank { Name = "Banken" };
+
+var gun = new Gun()
+{
+    Name = "Glock-18",
+    Damage = 20
+};
+
+var kage = new Food()
+{
+    Name = "Kage",
+    HealthPoints = 20
+};
 
 var world = new WorldBuilder()
     .AddGameManager()
         .AddEquipment()
-            .FromFile("/path/to/file")
+            .FromRange([gun, kage])
         .AddLocations()
-            .FromFolder("/path/to/folder")
+            .FromRange([location])
         .AddPersons()
-            .FromFile("/path/to/file")
+            .FromRange(peopleBuilder.CreatePeople(15))
+            .WithRandomItems(20)
         .EndWorldBuilding()
         .Build();
 

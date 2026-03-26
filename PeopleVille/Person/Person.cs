@@ -7,7 +7,7 @@ namespace PeopleVille.Persons
     public abstract class Person
     {
         public string Name { get; set; }
-        public int Health { get; set; }
+        public int Health { get; set; } = 100;
 
         // hellere at de starter med tomt inventory end et inventory der ikke eksisterer.
         public List<IEquipment> Inventory { get; set; } = [];
@@ -19,6 +19,7 @@ namespace PeopleVille.Persons
 
         public GameManager Manager { get; set; }
         public World World { get; set; }
+        public bool Dead { get; set; } = false;
 
         public virtual void Initialize() { }
 
