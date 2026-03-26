@@ -2,9 +2,9 @@ namespace PeopleVille.Persons
 {
     public class PeopleBuilder
     {
-        readonly string[] maleNames = ["John", "Peter", "Mikkel", "Lars", "Benjamin"];
-        readonly string[] femaleNames = ["Cirkeline", "Josefine", "Simone", "Gertrud", "Smilla"];
-        readonly string[] lastNames = ["Petersen", "Rasmussen", "Madsen"];
+        readonly string[] maleNames = ["John", "Peter", "Mikkel", "Lars", "Benjamin", "Anders", "Christian", "Mathias", "Magnus", "Emil"];
+        readonly string[] femaleNames = ["Cirkeline", "Josefine", "Simone", "Gertrud", "Smilla", "Mette", "Sofie", "Laura", "Emma", "Freja"];
+        readonly string[] lastNames = ["Petersen", "Rasmussen", "Madsen", "Jensen", "Nielsen", "Hansen", "Møller", "Lund", "Vestergaard"];
 
         public List<Person> CreatePeople(int number)
         {
