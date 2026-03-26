@@ -4,6 +4,7 @@ using PeopleVille.Persons;
 using PeopleVille.WorldBuilder;
 
 var peopleBuilder = new PeopleBuilder();
+var locationBuilder = new LocationBuilder();
 
 var location = new Bank { Name = "Banken" };
 
@@ -24,7 +25,7 @@ var world = new WorldBuilder()
         .AddEquipment()
             .FromRange([gun, kage])
         .AddLocations()
-            .FromRange([location])
+            .FromRange(locationBuilder.CreateLocations(15))
         .AddPersons()
             .FromRange(peopleBuilder.CreatePeople(15))
             .WithRandomItems(20)
