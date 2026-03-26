@@ -58,7 +58,7 @@ namespace PeopleVille.Persons
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
                     if (otherLocations.Count > 0)
                         Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
-                    Console.WriteLine($"{Name} Walked to {CurrentLocation.Name}");
+                    Console.WriteLine($"{Name} Gik hen til {CurrentLocation.Name}");
                     break;
                 case 3:
                     //Do nothing
