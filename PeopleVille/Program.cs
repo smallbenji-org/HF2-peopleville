@@ -6,8 +6,6 @@ using PeopleVille.WorldBuilder;
 var peopleBuilder = new PeopleBuilder();
 var locationBuilder = new LocationBuilder();
 
-var location = new Bank { Name = "Banken" };
-
 var gun = new Gun()
 {
     Name = "Glock-18",
