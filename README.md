@@ -7,8 +7,7 @@
 - [ ] Lav ny data så program kan køre
 ### Mikkel
 - [x] Opret logik DoSomething()
-- [ ] Personer skal kunne skifte lokation
-- [ ] Lav worldbuilder
+- [x] Personer skal kunne skifte lokation
 
 **Husk at opdatere mermaid løbende**
 
