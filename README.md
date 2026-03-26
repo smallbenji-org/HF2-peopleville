@@ -6,7 +6,8 @@
 - [x] Find ud af hvordan tid skal fungere
 - [ ] Lav ny data så program kan køre
 ### Mikkel
-- [ ] Opret logik DoSomething()
+- [x] Opret logik DoSomething()
+- [ ] Personer skal kunne skifte lokation
 - [ ] Lav worldbuilder
 
 **Husk at opdatere mermaid løbende**
