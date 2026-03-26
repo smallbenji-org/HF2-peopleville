@@ -1,6 +1,5 @@
 using PeopleVille.Equipment;
 using PeopleVille.WorldBuilder;
-using System.Diagnostics.CodeAnalysis;
 
 namespace PeopleVille.Persons
 {
