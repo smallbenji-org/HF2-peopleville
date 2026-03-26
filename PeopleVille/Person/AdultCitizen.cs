@@ -29,7 +29,7 @@ namespace PeopleVille.Persons
             // 50/50 om vi gør noget eller ej
             if (RNG.ThrowDice(Dices.D3) == 1)
                 return;
-            switch (RNG.ThrowDice(Dices.D3))
+            switch (RNG.ThrowDice(Dices.D4))
             {
                 case 1:
                     bool hasGun = Inventory.OfType<Gun>().Any();
@@ -61,6 +61,17 @@ namespace PeopleVille.Persons
                     Console.WriteLine($"{Name} Gik hen til {CurrentLocation.Name}");
                     break;
                 case 3:
+                    try
+                    {
+                        var items = this.Inventory.Where(x => x is not Gun && x is not Food).ToList();
+
+                        items[RNG.Range(0, items.Count)].Use(this);
+                    } catch
+                    {
+                        Console.WriteLine($"{this.Name} brugte ikke nogle items");
+                    }
+                break;
+                case 4:
                     //Do nothing
                 break;
             }

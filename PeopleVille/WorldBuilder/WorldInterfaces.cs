@@ -39,21 +39,4 @@ namespace PeopleVille.WorldBuilder
         IPersonBuilder WithRandomItems(int number);
         IWorldBuilder EndWorldBuilding();
     }
-
-    // public interface ITownBuilder
-    // {
-    //     ITownBuilder AddGunStore(string name);
-    //     ITownBuilder AddEggStore(string name);
-    //     ITownBuilder AddBank(string name);
-    //     List<Location> BuildTown();
-    // }
-
-    // public interface ICitizenBuilder
-    // {
-    //     ICitizenBuilder CreateAdult(string name, int health);
-    //     ICitizenBuilder CreateChild(string name, int health);
-    //     ICitizenBuilder WithGun(string name, int damage);
-    //     ICitizenBuilder WithFood(string name, int healthPoints);
-    //     List<Person> BuildCitizens();
-    // }
 }
