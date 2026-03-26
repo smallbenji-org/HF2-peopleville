@@ -1,5 +1,6 @@
 using PeopleVille.Equipment;
 using PeopleVille.Locations;
+using PeopleVille.WorldBuilder;
 
 namespace PeopleVille.Persons
 {
@@ -17,6 +18,9 @@ namespace PeopleVille.Persons
         public Location CurrentLocation { get; set; }
 
         public GameManager Manager { get; set; }
+        public World World { get; set; }
+
+        public virtual void Initialize() { }
 
         public void Walk(Location newLocation)
         {

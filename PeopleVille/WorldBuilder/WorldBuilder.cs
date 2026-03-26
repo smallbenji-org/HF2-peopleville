@@ -63,6 +63,8 @@ namespace PeopleVille.WorldBuilder
             foreach (var person in world.People)
             {
                 person.Manager = world.manager;
+                person.World = world;
+                person.Initialize();
             }
 
             return world;

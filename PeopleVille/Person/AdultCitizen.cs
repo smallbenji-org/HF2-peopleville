@@ -1,4 +1,6 @@
 using PeopleVille.Equipment;
+using PeopleVille.WorldBuilder;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PeopleVille.Persons
 {
@@ -7,7 +9,10 @@ namespace PeopleVille.Persons
         public AdultCitizen()
         {
             Age = RNG.Range(20, 85);
+        }
 
+        public override void Initialize()
+        {
             Manager.TickDone += DoSomething;
         }
 
@@ -39,12 +44,22 @@ namespace PeopleVille.Persons
 
         private void ShootRandomPerson()
         {
-            //
+            var targets = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation).ToList();
+            if (targets.Count == 0)
+                return;
+
+            var target = targets[RNG.ThrowDice(new Die(targets.Count)) - 1];
+            var gun = Inventory.OfType<Gun>().First();
+            gun.Use(target);
         }
 
         private void EatFood()
         {
-            //
+            var food = Inventory.OfType<Food>().First();
+            if (food == null)
+                return;
+
+            food.Use(this);
         }
     }
 }
