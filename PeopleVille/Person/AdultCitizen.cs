@@ -55,7 +55,10 @@ namespace PeopleVille.Persons
                 break;
                 case 2:
                     //Move location
-                break;
+                    var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
+                    if (otherLocations.Count > 0)
+                        Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
+                    break;
                 case 3:
                     //Do nothing
                 break;
