@@ -1,7 +1,6 @@
 ﻿using PeopleVille.Equipment;
 using PeopleVille.Locations;
 using PeopleVille.Persons;
-using PeopleVille;
 using System.Reflection;
 namespace PeopleVille.WorldBuilder
 {

@@ -1,5 +1,3 @@
-using PeopleVille.Equipment;
-
 namespace PeopleVille.Locations
 {
     public class Store : Location

@@ -26,7 +26,6 @@ namespace PeopleVille.Persons
                 return;
             }
 
-            // 50/50 om vi gør noget eller ej
             if (RNG.ThrowDice(Dices.D3) == 1)
                 return;
             switch (RNG.ThrowDice(Dices.D4))

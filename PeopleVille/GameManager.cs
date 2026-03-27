@@ -1,5 +1,3 @@
-using PeopleVille.Locations;
-
 namespace PeopleVille
 {
     public class GameManager
