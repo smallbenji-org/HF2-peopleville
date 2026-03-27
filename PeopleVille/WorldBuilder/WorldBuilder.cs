@@ -109,9 +109,17 @@ namespace PeopleVille.WorldBuilder
         {
             var instances = new List<T>();
             string[] dlls = Directory.GetFiles(pathToAssemblyFolder, "*.dll");
+            var baseAssemblyName = typeof(T).Assembly.GetName().Name;
 
             foreach (var dll in dlls)
             {
+                var assemblyName = AssemblyName.GetAssemblyName(dll).Name;
+
+                if (string.Equals(assemblyName, baseAssemblyName, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 instances.AddRange(LoadTypesFromAssembly<T>(dll));
             }
 

@@ -19,8 +19,14 @@ namespace PeopleVille.Equipment
 
         public void Use(Person target)
         {
-            target.Health -= this.Damage;
-            Console.WriteLine($"{target.Name} er blevet skudt og mistede {Damage} liv");
+            try
+            {
+                target.Health -= this.Damage;
+                Console.WriteLine($"{target.Name} er blevet skudt og mistede {Damage} liv");
+            } catch
+            {
+                Console.WriteLine($"{target.Name} prøvede at skyde, men det virkede ikke, øv bøv");
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace PeopleVille.Extension.Mod1;
 
 public class Snake : IEquipment
 {
-
+    public string Name { get; set; } = "Snake";
     public void Equip()
     {
         throw new NotImplementedException();
@@ -19,5 +19,25 @@ public class Snake : IEquipment
     public void Use(Person person)
     {
         Console.WriteLine($"{person.Name} brugte en slange, lol");
+    }
+}
+
+public class Trumpet : IEquipment
+{
+    public string Name { get; set; } = "Trumpet med 90 grader";
+
+    public void Equip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Unequip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Use(Person person)
+    {
+        Console.WriteLine($"{person.Name} brugte en trumpet, musik lyder i {person.CurrentLocation.Name}");
     }
 }
