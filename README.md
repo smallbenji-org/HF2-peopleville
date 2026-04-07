@@ -5,6 +5,7 @@
 - [ ] Exceptions, and lots of them?!
 ### Mikkel
 - [ ] Create TODO list
+
 **Husk at opdatere mermaid løbende**
 
 ```mermaid
