@@ -5,7 +5,8 @@
 - [ ] Exceptions, and lots of them?!
 ### Mikkel
 - [x] Create TODO list
-- [ ] Citizens skal kunne handle i butikker
+- [x] Citizens skal kunne handle i butikker
+- [ ] Implenter Threading, en Thread? to? Jeg ved det ikke!
 
 **Husk at opdatere mermaid løbende**
 
