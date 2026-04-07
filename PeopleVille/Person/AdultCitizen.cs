@@ -58,6 +58,7 @@ namespace PeopleVille.Persons
                     if (otherLocations.Count > 0)
                         Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
                     Console.WriteLine($"{Name} Gik hen til {CurrentLocation.Name}");
+                    CurrentLocation.UseLocation(this);
                     break;
                 case 3:
                     try
