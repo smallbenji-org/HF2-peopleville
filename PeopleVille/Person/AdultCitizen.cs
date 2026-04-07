@@ -52,7 +52,7 @@ namespace PeopleVille.Persons
                     {
                         EatFood();
                     }
-                break;
+                    break;
                 case 2:
                     //Move location
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
@@ -71,7 +71,7 @@ namespace PeopleVille.Persons
                     {
                         Console.WriteLine($"{this.Name} brugte ikke nogle items");
                     }
-                break;
+                    break;
                 case 4:
                     //Do nothing
                 break;
@@ -80,13 +80,13 @@ namespace PeopleVille.Persons
 
         private void ShootRandomPerson()
         {
-            var targets = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
-            if (targets.Count == 0)
+            var peopleAtLocation = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
+            if (peopleAtLocation.Count == 0)
                 return;
 
-            var target = targets[RNG.ThrowDice(new Die(targets.Count)) - 1];
+            var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
             var gun = Inventory.OfType<Gun>().First();
-            gun.Use(target);
+            gun.Use(randomPerson);
         }
 
         private void EatFood()
