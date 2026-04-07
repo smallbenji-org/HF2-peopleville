@@ -19,9 +19,15 @@ namespace PeopleVille.Persons
         {
             if (this.Health <= 0 && !Dead)
             {
-                this.Dead = true;
+                if (Dead)
+                    return;
 
-                Console.WriteLine($"RIP: {this.Name} døde...");
+                if (this.Health <= 0)
+                {
+                    this.Dead = true;
+                    Console.WriteLine($"RIP: {this.Name} døde...");
+                    return;
+                }
 
                 return;
             }
@@ -90,7 +96,7 @@ namespace PeopleVille.Persons
 
         private void EatFood()
         {
-            var food = Inventory.OfType<Food>().First();
+            var food = Inventory.OfType<Food>().FirstOrDefault();
             if (food == null)
                 return;
 
