@@ -22,7 +22,7 @@ namespace PeopleVille.Equipment
             try
             {
                 target.Health -= this.Damage;
-                Console.WriteLine($"{target.Name} er blevet skudt og mistede {Damage} liv");
+                Console.WriteLine($"{target.Name} er blevet skudt med {Name} og mistede {Damage} liv");
             } catch
             {
                 Console.WriteLine($"{target.Name} prøvede at skyde, men det virkede ikke, øv bøv");
