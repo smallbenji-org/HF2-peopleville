@@ -1,4 +1,5 @@
-﻿using PeopleVille.Equipment;
+﻿using PeopleVille;
+using PeopleVille.Equipment;
 using PeopleVille.Locations;
 using PeopleVille.Persons;
 using PeopleVille.WorldBuilder;
@@ -18,11 +19,16 @@ var kage = new Food()
     HealthPoints = 20
 };
 
+var modFolder = Path.GetFullPath(
+    Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", 
+                 "PeopleVille.Extension.Mod1", "bin", "Debug", "net10.0"));
+
+
 var world = new WorldBuilder()
     .AddGameManager()
         .AddEquipment()
             .FromRange([gun, kage])
-            .FromFolder("/home/smallbenji/school/hf2/HF2-peopleville/PeopleVille.Extension.Mod1/bin/Debug/net10.0")
+            .FromFolder(modFolder)
         .AddLocations()
             .FromRange(locationBuilder.CreateLocations(15))
         .AddPersons()
@@ -32,3 +38,5 @@ var world = new WorldBuilder()
         .Build();
 
 await world.manager.StartClock();
+//var tui = new TUI(world);
+//tui.StartApp();
