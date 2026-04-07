@@ -4,7 +4,8 @@
 ### Benjamin
 - [ ] Exceptions, and lots of them?!
 ### Mikkel
-- [ ] Create TODO list
+- [x] Create TODO list
+- [ ] Citizens skal kunne handle i butikker
 
 **Husk at opdatere mermaid løbende**
 
