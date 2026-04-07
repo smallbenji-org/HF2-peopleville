@@ -1,3 +1,4 @@
+using PeopleVille.WorldBuilder;
 using Terminal.Gui.App;
 using Terminal.Gui.Drivers;
 using Terminal.Gui.Views;
@@ -6,7 +7,15 @@ namespace PeopleVille
 {
     public class TUI
     {
+        private readonly World world;
+
+        public TUI(World world)
+        {
+            this.world = world;
+        }
+
         public TextView LogView;
+
         public void StartApp()
         {
             using IApplication app = Application.Create().Init();
@@ -34,6 +43,11 @@ namespace PeopleVille
                 }
                 // NEVER DELETE THESE LINES # END
             };
+
+            Task.Run(async () =>
+            {
+               await world.manager.StartClock();
+            });
 
             app.Run(top);
         }
