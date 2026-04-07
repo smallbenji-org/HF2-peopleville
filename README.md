@@ -2,13 +2,9 @@
 
 ## TODO
 ### Benjamin
-- [x] Implementer dynamisk import af "eksterne" dll'er
-- [x] Find ud af hvordan tid skal fungere
-- [x] Lav ny data så program kan køre
+- [ ] Exceptions, and lots of them?!
 ### Mikkel
-- [x] Opret logik DoSomething()
-- [x] Personer skal kunne skifte lokation
-
+- [ ] Create TODO list
 **Husk at opdatere mermaid løbende**
 
 ```mermaid
