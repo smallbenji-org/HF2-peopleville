@@ -10,6 +10,7 @@ namespace PeopleVille
         {
             while (true)
             {
+                Console.WriteLine($"---- Tick ----");
                 TickDone.Invoke();
                 await Task.Delay(500);
             }
