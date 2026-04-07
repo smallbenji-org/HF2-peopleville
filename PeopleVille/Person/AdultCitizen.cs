@@ -17,18 +17,13 @@ namespace PeopleVille.Persons
 
         public void DoSomething()
         {
-            if (this.Health <= 0 && !Dead)
+            if (Dead)
+                return;
+
+            if (this.Health <= 0)
             {
-                if (Dead)
-                    return;
-
-                if (this.Health <= 0)
-                {
-                    this.Dead = true;
-                    Console.WriteLine($"RIP: {this.Name} døde...");
-                    return;
-                }
-
+                this.Dead = true;
+                Console.WriteLine($"RIP: {this.Name} døde...");
                 return;
             }
 
