@@ -6,6 +6,7 @@
 ### Mikkel
 - [x] Create TODO list
 - [x] Citizens skal kunne handle i butikker
+- [ ] Implenter Threading, en Thread? to? Jeg ved det ikke!
 
 **Husk at opdatere mermaid løbende**
 
