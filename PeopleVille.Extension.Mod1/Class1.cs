@@ -18,7 +18,7 @@ public class Snake : IEquipment
 
     public void Use(Person person)
     {
-        var message = $"{person.Name} brugte en slange, lol";
+        var message = $"Brugte en slange, lol";
         person.World?.globalLogger.LogEvent(person, message);
     }
 }
@@ -39,7 +39,7 @@ public class Trumpet : IEquipment
 
     public void Use(Person person)
     {
-        var message = $"{person.Name} brugte en trumpet, musik lyder i {person.CurrentLocation.Name}";
+        var message = $"Brugte en trumpet, musik lyder i {person.CurrentLocation.Name}";
         person.World?.globalLogger.LogEvent(person, message);
     }
 }

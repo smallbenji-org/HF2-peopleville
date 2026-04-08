@@ -18,6 +18,14 @@ namespace PeopleVille.Persons
         public override void Initialize()
         {
             Manager.TickDone += DoSomething;
+
+
+            //ingen lokationer? DØ.
+            if (World.Locations.Count == 0)
+                return;
+
+            var randomLocation = World.Locations[RNG.Range(0, World.Locations.Count)];
+            Walk(randomLocation);
         }
 
         public void DoSomething()
@@ -63,7 +71,7 @@ namespace PeopleVille.Persons
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
                     if (otherLocations.Count > 0)
                         Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
-                    Log($"{Name} Gik hen til {CurrentLocation.Name}");
+                    Log($"Gik hen til {CurrentLocation.Name}");
                     CurrentLocation.UseLocation(this);
                     break;
                 case 3:
@@ -74,7 +82,7 @@ namespace PeopleVille.Persons
                         items[RNG.Range(0, items.Count)].Use(this);
                     } catch
                     {
-                        Log($"{this.Name} brugte ikke nogle items");
+                        Log($"Brugte ikke nogle items");
                     }
                     break;
                 case 4:
