@@ -86,7 +86,7 @@ namespace PeopleVille.Persons
 
             var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
             var gun = Inventory.OfType<Gun>().First();
-            gun.Use(randomPerson);
+            gun.Use(randomPerson, this.Name);
         }
 
         private void EatFood()

@@ -11,7 +11,7 @@ namespace PeopleVille.Persons
 
         // hellere at de starter med tomt inventory end et inventory der ikke eksisterer.
         public List<IEquipment> Inventory { get; set; } = [];
-
+        public int MaxInventorySize { get; set; } = 5;
         public object Location { get; set; }
         public int Money { get; set; }
         public int Age { get; set; }
@@ -20,6 +20,14 @@ namespace PeopleVille.Persons
         public GameManager Manager { get; set; }
         public World World { get; set; }
         public bool Dead { get; set; } = false;
+
+        public bool TryAddToInventory(IEquipment item)
+        {
+            if (Inventory.Count >= MaxInventorySize)
+                return false;
+            Inventory.Add(item);
+            return true;
+        }
 
         public virtual void Initialize() { }
 
