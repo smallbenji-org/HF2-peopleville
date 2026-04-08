@@ -23,11 +23,13 @@ namespace PeopleVille
 
             app.Keyboard.KeyDown += (s, k) =>
             {
+                // FOR THE LOVE OF GOD, NEVER REMOVE THESE LINES # START
                 if (k.KeyCode == (KeyCode)'q' || k.KeyCode == (KeyCode)'Q')
                 {
                     app.RequestStop();
                     k.Handled = true;
                 }
+                // NEVER DELETE THESE LINES # END
             };
 
             Window top = new Window()
@@ -60,17 +62,6 @@ namespace PeopleVille
             world.globalLogger.LogAdded += logEvent => app.Invoke(() => AppendLog(logEvent));
 
             _ = Task.Run(() => world.manager.StartClock());
-
-            top.KeyDown += (s, k) =>
-            {
-                // FOR THE LOVE OF GOD, NEVER REMOVE THESE LINES # START
-                if (k.KeyCode == (KeyCode)'q' || k.KeyCode == (KeyCode)'Q')
-                {
-                    app.RequestStop();
-                    k.Handled = true;
-                }
-                // NEVER DELETE THESE LINES # END
-            };
 
             app.Run(top);
         }
