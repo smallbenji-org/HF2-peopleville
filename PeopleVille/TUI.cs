@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Globalization;
 using PeopleVille.WorldBuilder;
 using Terminal.Gui.App;
 using Terminal.Gui.Drivers;
@@ -10,19 +11,20 @@ namespace PeopleVille
 {
     public class TUI
     {
+        private const string AllCharactersOption = "All";
+
         private readonly World world;
         private TableView logView;
 
-        private DataTable dt;
+        private readonly DataTable allLogs;
+        private readonly DataTable dt;
         private ListView _characterList;
 
         public TUI(World world)
         {
             this.world = world;
-            dt = new();
-            dt.Columns.Add("Time");
-            dt.Columns.Add("Person");
-            dt.Columns.Add("Event");
+            allLogs = CreateLogTable();
+            dt = CreateLogTable();
         }
 
         public void StartApp()
@@ -46,13 +48,17 @@ namespace PeopleVille
             };
 
             var characters = world.People;
-            ObservableCollection<string> characterNames = new (characters.Select(x => x.Name));
+            ObservableCollection<string> characterNames = new ([AllCharactersOption, .. characters.Select(x => x.Name)]);
             _characterList = new()
             {
                 Width = Dim.Percent(30),
                 Height = Dim.Fill(),
-                Source = new ListWrapper<string>(characterNames)
+                Source = new ListWrapper<string>(characterNames),
+                SelectedItem = 0
             };
+            _characterList.ValueChanged += (s, e) => ApplyCharacterFilter();
+
+            var dts = new DataTableSource(dt);
 
             logView = new()
             {
@@ -60,10 +66,12 @@ namespace PeopleVille
                 X = Pos.Right(_characterList),
                 Width = Dim.Fill(),
                 Height = Dim.Fill(),
-                Table = new DataTableSource(dt)
+                Table = dts
             };
             top.Add(_characterList);
             top.Add(logView);
+
+            ApplyCharacterFilter();
 
             world.globalLogger.LogAdded += logEvent => app.Invoke(() => AppendLog(logEvent));
 
@@ -78,12 +86,68 @@ namespace PeopleVille
             {
                 return;
             }
-            if (_characterList.SelectedItem != null)
+            allLogs.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
+            ApplyCharacterFilter();
+        }
+
+        private void ApplyCharacterFilter()
+        {
+            if (_characterList == null || dt == null)
             {
-                dt.DefaultView.RowFilter = $"Person = '{world.People[_characterList.SelectedItem ?? 0].Name}'";
+                return;
             }
 
-            dt.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
+            dt.Rows.Clear();
+
+            int? selectedIndex = _characterList.SelectedItem;
+            if (!selectedIndex.HasValue || selectedIndex.Value <= 0)
+            {
+                foreach (DataRow row in allLogs.Rows)
+                {
+                    dt.ImportRow(row);
+                }
+                RefreshLogView();
+                return;
+            }
+
+            int personIndex = selectedIndex.Value - 1;
+            if (personIndex < 0 || personIndex >= world.People.Count)
+            {
+                RefreshLogView();
+                return;
+            }
+
+            string selectedName = world.People[personIndex].Name;
+            foreach (DataRow row in allLogs.Rows)
+            {
+                string rowPerson = row["Person"] as string;
+                if (string.Equals(rowPerson, selectedName, StringComparison.Ordinal))
+                {
+                    dt.ImportRow(row);
+                }
+            }
+
+            RefreshLogView();
+        }
+
+        private void RefreshLogView()
+        {
+            if (logView == null)
+            {
+                return;
+            }
+
+            logView.RefreshContentSize();
+            logView.Update();
+        }
+
+        private static DataTable CreateLogTable()
+        {
+            DataTable table = new();
+            table.Columns.Add("Time");
+            table.Columns.Add("Person");
+            table.Columns.Add("Event");
+            return table;
         }
     }
 }

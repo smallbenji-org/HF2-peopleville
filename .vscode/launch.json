@@ -9,7 +9,7 @@
             "program": "${workspaceFolder}/PeopleVille/bin/Debug/net10.0/PeopleVille.dll",
             "args": [],
             "cwd": "${workspaceFolder}/PeopleVille",
-            "console": "internalConsole",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         }
     ]
