@@ -14,12 +14,7 @@ namespace PeopleVille
             while (true)
             {
                 TickDone.Invoke();
-                // This need to be fixed, somehow, maybe a global log method?
-                var loggerPerson = World?.People.FirstOrDefault();
-                if (loggerPerson != null)
-                {
-                    World.globalLogger.LogEvent(loggerPerson, "---- Tick ----");
-                }
+                World.globalLogger.LogEvent(null, "---- Tick ----");
                 await Task.Delay(500);
             }
         }
