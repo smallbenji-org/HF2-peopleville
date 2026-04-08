@@ -15,12 +15,12 @@ namespace PeopleVille.Equipment
         {
         }
 
-        public void Use(Person person)
+        public void Use(Person user, Person target)
         {
-            person.Health += HealthPoints;
-            var message = $"{person.Name} spiste og healede {HealthPoints}";
-            person.World?.globalLogger.LogEvent(person, message);
-            person.Inventory.Remove(this);
+            target.Health += HealthPoints;
+            var message = $"{target.Name} spiste og healede {HealthPoints}";
+            target.World?.globalLogger.LogEvent(user, message);
+            target.Inventory.Remove(this);
         }
     }
 }

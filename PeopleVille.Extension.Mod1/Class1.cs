@@ -16,10 +16,10 @@ public class Snake : IEquipment
         throw new NotImplementedException();
     }
 
-    public void Use(Person person)
+    public void Use(Person user, Person target)
     {
         var message = $"Brugte en slange, lol";
-        person.World?.globalLogger.LogEvent(person, message);
+        user.World?.globalLogger.LogEvent(user, message);
     }
 }
 
@@ -37,9 +37,9 @@ public class Trumpet : IEquipment
         throw new NotImplementedException();
     }
 
-    public void Use(Person person)
+    public void Use(Person user, Person target)
     {
-        var message = $"Brugte en trumpet, musik lyder i {person.CurrentLocation.Name}";
-        person.World?.globalLogger.LogEvent(person, message);
+        var message = $"Brugte en trumpet, musik lyder i {user.CurrentLocation.Name}";
+        user.World?.globalLogger.LogEvent(user, message);
     }
 }

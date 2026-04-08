@@ -79,7 +79,7 @@ namespace PeopleVille.Persons
                     {
                         var items = this.Inventory.Where(x => x is not Gun && x is not Food).ToList();
 
-                        items[RNG.Range(0, items.Count)].Use(this);
+                        items[RNG.Range(0, items.Count)].Use(this, this);
                     } catch
                     {
                         Log($"Brugte ikke nogle items");
@@ -99,7 +99,7 @@ namespace PeopleVille.Persons
 
             var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
             var gun = Inventory.OfType<Gun>().First();
-            gun.Use(randomPerson, this.Name);
+            gun.Use(this, randomPerson);
         }
 
         private void EatFood()
@@ -108,7 +108,7 @@ namespace PeopleVille.Persons
             if (food == null)
                 return;
 
-            food.Use(this);
+            food.Use(this, this);
         }
     }
 }

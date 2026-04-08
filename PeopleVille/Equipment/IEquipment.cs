@@ -6,6 +6,6 @@ namespace PeopleVille.Equipment
     {
         public void Equip();
         public void Unequip();
-        public void Use(Person person);
+        public void Use(Person user, Person target);
     }
 }
