@@ -20,7 +20,7 @@ var kage = new Food()
 };
 
 var modFolder = Path.GetFullPath(
-    Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", 
+    Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..",
                  "PeopleVille.Extension.Mod1", "bin", "Debug", "net10.0"));
 
 
@@ -38,5 +38,5 @@ var world = new WorldBuilder()
         .Build();
 
 await world.manager.StartClock();
-//var tui = new TUI(world);
-//tui.StartApp();
+var tui = new TUI(world);
+tui.StartApp();
