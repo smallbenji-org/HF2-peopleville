@@ -10,5 +10,6 @@ namespace PeopleVille.WorldBuilder
         public List<IEquipment> Equipment = [];
         public List<Person> People = [];
         public List<Location> Locations = [];
+        public GlobalLogger globalLogger = new();
     }
 }

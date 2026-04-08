@@ -24,19 +24,22 @@ namespace PeopleVille.Locations
             {
                 person.Money -= 800;
                 person.TryAddToInventory(new Gun { Name = "Shotgun", Damage = 50 });
-                Console.WriteLine($"{person.Name} køber Shotgun for 800 kr. i {Name}");
+                var message = $"{person.Name} køber Shotgun for 800 kr. i {Name}";
+                person.World?.globalLogger.LogEvent(person, message);
             }
             else if (person.Money >= 500)
             {
                 person.Money -= 500;
                 person.TryAddToInventory(new Gun { Name = "Riffel", Damage = 30 });
-                Console.WriteLine($"{person.Name} køber Riffel for 500 kr. i {Name}");
+                var message = $"{person.Name} køber Riffel for 500 kr. i {Name}";
+                person.World?.globalLogger.LogEvent(person, message);
             }
             else if (person.Money >= 200)
             {
                 person.Money -= 200;
                 person.TryAddToInventory(new Gun { Name = "Pistol", Damage = 15 });
-                Console.WriteLine($"{person.Name} køber Pistol for 200 kr. i {Name}");
+                var message = $"{person.Name} køber Pistol for 200 kr. i {Name}";
+                person.World?.globalLogger.LogEvent(person, message);
             }
         }
     }

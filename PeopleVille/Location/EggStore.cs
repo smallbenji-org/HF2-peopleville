@@ -11,13 +11,15 @@ namespace PeopleVille.Locations
             {
                 person.Money -= 100;
                 person.TryAddToInventory(new Food { Name = "Bakke Æg", HealthPoints = 60 });
-                Console.WriteLine($"{person.Name} køber Bakke Æg for 100 kr. i {Name}");
+                var message = $"{person.Name} køber Bakke Æg for 100 kr. i {Name}";
+                person.World?.globalLogger.LogEvent(person, message);
             }
             else if (person.Money >= 20)
             {
                 person.Money -= 20;
                 person.TryAddToInventory(new Food { Name = "Æg", HealthPoints = 10 });
-                Console.WriteLine($"{person.Name} køber Æg for 20 kr. i {Name}");
+                var message = $"{person.Name} køber Æg for 20 kr. i {Name}";
+                person.World?.globalLogger.LogEvent(person, message);
             }
         }
     }

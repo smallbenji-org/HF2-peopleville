@@ -18,7 +18,8 @@ public class Snake : IEquipment
 
     public void Use(Person person)
     {
-        Console.WriteLine($"{person.Name} brugte en slange, lol");
+        var message = $"{person.Name} brugte en slange, lol";
+        person.World?.globalLogger.LogEvent(person, message);
     }
 }
 
@@ -38,6 +39,7 @@ public class Trumpet : IEquipment
 
     public void Use(Person person)
     {
-        Console.WriteLine($"{person.Name} brugte en trumpet, musik lyder i {person.CurrentLocation.Name}");
+        var message = $"{person.Name} brugte en trumpet, musik lyder i {person.CurrentLocation.Name}";
+        person.World?.globalLogger.LogEvent(person, message);
     }
 }

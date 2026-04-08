@@ -59,6 +59,8 @@ namespace PeopleVille.WorldBuilder
 
         World IWorldBuilder.Build()
         {
+            world.manager.World = world;
+
             foreach (var person in world.People)
             {
                 person.Manager = world.manager;

@@ -9,18 +9,17 @@ namespace PeopleVille.Equipment
 
         public void Equip()
         {
-            Console.WriteLine("");
         }
 
         public void Unequip()
         {
-            Console.WriteLine("");
         }
 
         public void Use(Person person)
         {
             person.Health += HealthPoints;
-            Console.WriteLine($"{person.Name} spiste og healede {HealthPoints}");
+            var message = $"{person.Name} spiste og healede {HealthPoints}";
+            person.World?.globalLogger.LogEvent(person, message);
             person.Inventory.Remove(this);
         }
     }

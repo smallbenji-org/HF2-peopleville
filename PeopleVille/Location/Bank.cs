@@ -8,7 +8,8 @@ namespace PeopleVille.Locations
         {
             int amount = RNG.Range(100, 501);
             person.Money += amount;
-            Console.WriteLine($"{person.Name} hæver {amount} kr. i {Name}");
+            var message = $"{person.Name} hæver {amount} kr. i {Name}";
+            person.World?.globalLogger.LogEvent(person, message);
         }
     }
 }

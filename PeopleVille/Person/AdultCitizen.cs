@@ -10,6 +10,11 @@ namespace PeopleVille.Persons
             Age = RNG.Range(20, 85);
         }
 
+        private void Log(string message)
+        {
+            World?.globalLogger.LogEvent(this, message);
+        }
+
         public override void Initialize()
         {
             Manager.TickDone += DoSomething;
@@ -23,7 +28,7 @@ namespace PeopleVille.Persons
             if (this.Health <= 0)
             {
                 this.Dead = true;
-                Console.WriteLine($"RIP: {this.Name} døde...");
+                Log($"RIP: {this.Name} døde...");
                 return;
             }
 
@@ -58,7 +63,7 @@ namespace PeopleVille.Persons
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
                     if (otherLocations.Count > 0)
                         Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
-                    Console.WriteLine($"{Name} Gik hen til {CurrentLocation.Name}");
+                    Log($"{Name} Gik hen til {CurrentLocation.Name}");
                     CurrentLocation.UseLocation(this);
                     break;
                 case 3:
@@ -69,7 +74,7 @@ namespace PeopleVille.Persons
                         items[RNG.Range(0, items.Count)].Use(this);
                     } catch
                     {
-                        Console.WriteLine($"{this.Name} brugte ikke nogle items");
+                        Log($"{this.Name} brugte ikke nogle items");
                     }
                     break;
                 case 4:

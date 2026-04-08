@@ -9,12 +9,10 @@ namespace PeopleVille.Equipment
 
         public void Equip()
         {
-            Console.WriteLine("");
         }
 
         public void Unequip()
         {
-            Console.WriteLine("");
         }
 
         public void Use(Person target)
@@ -27,11 +25,12 @@ namespace PeopleVille.Equipment
             try
             {
                 target.Health -= this.Damage;
-                Console.WriteLine($"{target.Name} er blevet skudt af {shooterName} med {Name} og mistede {Damage} liv");
-            }
-            catch
+                var message = $"{target.Name} er blevet skudt af {shooterName} med {Name} og mistede {Damage} liv";
+                target.World?.globalLogger.LogEvent(target, message);
+            } catch
             {
-                Console.WriteLine($"{target.Name} prøvede at skyde, men det virkede ikke, øv bøv");
+                var message = $"{target.Name} prøvede at skyde, men det virkede ikke, øv bøv";
+                target.World?.globalLogger.LogEvent(target, message);
             }
         }
     }
