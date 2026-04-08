@@ -11,6 +11,11 @@ public class Snake : IEquipment
         throw new NotImplementedException();
     }
 
+    public bool NeedsTarget()
+    {
+        return false;
+    }
+
     public void Unequip()
     {
         throw new NotImplementedException();
@@ -32,6 +37,11 @@ public class Trumpet : IEquipment
         throw new NotImplementedException();
     }
 
+    public bool NeedsTarget()
+    {
+        return false;
+    }
+
     public void Unequip()
     {
         throw new NotImplementedException();
@@ -41,5 +51,32 @@ public class Trumpet : IEquipment
     {
         var message = $"Brugte en trumpet, musik lyder i {user.CurrentLocation.Name}";
         user.World?.globalLogger.LogEvent(user, message);
+    }
+}
+
+public class Svupper : IEquipment
+{
+    public void Equip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool NeedsTarget()
+    {
+        return true;
+    }
+
+    public void Unequip()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Use(Person user, Person target)
+    {
+        var message = $"Brugte en svupper på {target.Name}, øv bøv";
+        user.World?.globalLogger.LogEvent(user, message);
+
+        var targetMessage = $"AD! {user.Name} svuppede dig";
+        user.World?.globalLogger.LogEvent(target, targetMessage);
     }
 }
