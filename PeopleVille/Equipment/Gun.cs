@@ -22,6 +22,8 @@ namespace PeopleVille.Equipment
                 target.Health -= this.Damage;
                 var message = $"Skød {target.Name} med {Name} og mistede {Damage} liv";
                 target.World?.globalLogger.LogEvent(user, message);
+                var message2 = $"Blev skudt af {user.Name} med {Name} og mistede {Damage} liv";
+                target.World?.globalLogger.LogEvent(target, message2);
             } catch
             {
                 var message = $"Prøvede at skyde, men det virkede ikke, øv bøv";
