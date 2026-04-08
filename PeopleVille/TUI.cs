@@ -47,7 +47,7 @@ namespace PeopleVille
                 Title = "PeopleVille"
             };
 
-            var characters = world.People;
+            var characters = world.People.OrderBy(x => x.Name).ToList();
             ObservableCollection<string> characterNames = new ([AllCharactersOption, .. characters.Select(x => x.Name)]);
             _characterList = new()
             {
@@ -117,7 +117,7 @@ namespace PeopleVille
                 return;
             }
 
-            string selectedName = world.People[personIndex].Name;
+            string selectedName = world.People.OrderBy(x => x.Name).ToList()[personIndex].Name;
             foreach (DataRow row in allLogs.Rows)
             {
                 string rowPerson = row["Person"] as string;
