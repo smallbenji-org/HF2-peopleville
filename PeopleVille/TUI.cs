@@ -80,9 +80,7 @@ namespace PeopleVille
             }
             if (_characterList.SelectedItem != null)
             {
-                Console.WriteLine(_characterList.SelectedItem);
-
-                // dt.DefaultView.RowFilter = $"Person = {world.People[_characterList.SelectedItem ?? 0].Name}";
+                dt.DefaultView.RowFilter = $"Person = '{world.People[_characterList.SelectedItem ?? 0].Name}'";
             }
 
             dt.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
