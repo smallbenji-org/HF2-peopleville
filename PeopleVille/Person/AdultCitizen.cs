@@ -74,7 +74,7 @@ namespace PeopleVille.Persons
                     break;
                 case 4:
                     //Do nothing
-                break;
+                    break;
             }
         }
 
