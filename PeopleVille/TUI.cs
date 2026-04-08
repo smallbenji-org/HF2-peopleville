@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Data;
 using PeopleVille.WorldBuilder;
 using Terminal.Gui.App;
 using Terminal.Gui.Drivers;
@@ -10,11 +11,18 @@ namespace PeopleVille
     public class TUI
     {
         private readonly World world;
-        private TextView logView;
+        private TableView logView;
+
+        private DataTable dt;
+        private ListView _characterList;
 
         public TUI(World world)
         {
             this.world = world;
+            dt = new();
+            dt.Columns.Add("Time");
+            dt.Columns.Add("Person");
+            dt.Columns.Add("Event");
         }
 
         public void StartApp()
@@ -39,22 +47,20 @@ namespace PeopleVille
 
             var characters = world.People;
             ObservableCollection<string> characterNames = new (characters.Select(x => x.Name));
-            ListView _characterList = new()
+            _characterList = new()
             {
                 Width = Dim.Percent(30),
                 Height = Dim.Fill(),
                 Source = new ListWrapper<string>(characterNames)
             };
 
-
             logView = new()
             {
                 Title = "Log View",
-                ReadOnly = true,
                 X = Pos.Right(_characterList),
                 Width = Dim.Fill(),
                 Height = Dim.Fill(),
-                WordWrap = false
+                Table = new DataTableSource(dt)
             };
             top.Add(_characterList);
             top.Add(logView);
@@ -74,7 +80,9 @@ namespace PeopleVille
             }
             if (_characterList.SelectedItem != null)
             {
-                dt.DefaultView.RowFilter = $"Person = '{world.People[_characterList.SelectedItem ?? 0].Name}'";
+                Console.WriteLine(_characterList.SelectedItem);
+
+                // dt.DefaultView.RowFilter = $"Person = {world.People[_characterList.SelectedItem ?? 0].Name}";
             }
 
             dt.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
