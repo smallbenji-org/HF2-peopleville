@@ -37,6 +37,6 @@ var world = new WorldBuilder()
         .EndWorldBuilding()
         .Build();
 
-await world.manager.StartClock();
+// await world.manager.StartClock();
 var tui = new TUI(world);
 tui.StartApp();
