@@ -11,6 +11,11 @@ namespace PeopleVille.Equipment
         {
         }
 
+        public bool NeedsTarget()
+        {
+            return true;
+        }
+
         public void Unequip()
         {
         }

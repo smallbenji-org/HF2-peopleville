@@ -78,8 +78,21 @@ namespace PeopleVille.Persons
                     try
                     {
                         var items = this.Inventory.Where(x => x is not Gun && x is not Food).ToList();
+                        var randomItem = items[RNG.Range(0, items.Count)];
+                        if (randomItem.NeedsTarget())
+                        {
+                            var peopleAtLocation = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
+                            if (peopleAtLocation.Count == 0)
+                                return;
 
-                        items[RNG.Range(0, items.Count)].Use(this, this);
+                            var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
+
+                            randomItem.Use(this, randomPerson);
+                        }
+                        else
+                        {
+                            randomItem.Use(this, this);
+                        }
                     } catch
                     {
                         Log($"Brugte ikke nogle items");
