@@ -4,7 +4,7 @@
 ### Benjamin
 - [ ] Exceptions, and lots of them?!
 ### Mikkel
-- [ ] Rework Inventory
+- [x] Rework Inventory
 - [ ] Threading
 - [ ] Begynd på relationer mellem citizens (hvis muligt)
 
