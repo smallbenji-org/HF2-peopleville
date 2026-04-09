@@ -7,17 +7,9 @@ namespace PeopleVille.Equipment
         public required string Name { get; set; }
         public int Damage { get; set; }
 
-        public void Equip()
-        {
-        }
-
         public bool NeedsTarget()
         {
             return true;
-        }
-
-        public void Unequip()
-        {
         }
 
         public void Use(Person user, Person target)

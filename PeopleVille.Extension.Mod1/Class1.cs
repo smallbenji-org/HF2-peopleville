@@ -6,19 +6,10 @@ namespace PeopleVille.Extension.Mod1;
 public class Snake : IEquipment
 {
     public string Name { get; set; } = "Snake";
-    public void Equip()
-    {
-        throw new NotImplementedException();
-    }
 
     public bool NeedsTarget()
     {
         return false;
-    }
-
-    public void Unequip()
-    {
-        throw new NotImplementedException();
     }
 
     public void Use(Person user, Person target)
@@ -32,19 +23,9 @@ public class Trumpet : IEquipment
 {
     public string Name { get; set; } = "Trumpet med 90 grader";
 
-    public void Equip()
-    {
-        throw new NotImplementedException();
-    }
-
     public bool NeedsTarget()
     {
         return false;
-    }
-
-    public void Unequip()
-    {
-        throw new NotImplementedException();
     }
 
     public void Use(Person user, Person target)
@@ -56,19 +37,9 @@ public class Trumpet : IEquipment
 
 public class Svupper : IEquipment
 {
-    public void Equip()
-    {
-        throw new NotImplementedException();
-    }
-
     public bool NeedsTarget()
     {
         return true;
-    }
-
-    public void Unequip()
-    {
-        throw new NotImplementedException();
     }
 
     public void Use(Person user, Person target)
