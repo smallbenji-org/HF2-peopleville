@@ -20,21 +20,21 @@ namespace PeopleVille.Locations
             /*if (person.Inventory.OfType<Gun>().Any())
                 return;*/
 
-            if (person.Money >= 800)
+            if (person.Money >= 800 && person.Inventory.Count < 5)
             {
                 person.Money -= 800;
                 person.TryAddToInventory(new Gun { Name = "Shotgun", Damage = 50 });
                 var message = $"Købte Shotgun for 800 kr. i {Name}";
                 person.World?.globalLogger.LogEvent(person, message);
             }
-            else if (person.Money >= 500)
+            else if (person.Money >= 500 && person.Inventory.Count < 5)
             {
                 person.Money -= 500;
                 person.TryAddToInventory(new Gun { Name = "Riffel", Damage = 30 });
                 var message = $"Købte Riffel for 500 kr. i {Name}";
                 person.World?.globalLogger.LogEvent(person, message);
             }
-            else if (person.Money >= 200)
+            else if (person.Money >= 200 && person.Inventory.Count < 5)
             {
                 person.Money -= 200;
                 person.TryAddToInventory(new Gun { Name = "Pistol", Damage = 15 });

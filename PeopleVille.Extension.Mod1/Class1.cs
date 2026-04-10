@@ -37,6 +37,8 @@ public class Trumpet : IEquipment
 
 public class Svupper : IEquipment
 {
+    public string Name { get; set; } = "Svupper";
+
     public bool NeedsTarget()
     {
         return true;

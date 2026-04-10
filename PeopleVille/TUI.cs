@@ -19,6 +19,7 @@ namespace PeopleVille
         private readonly DataTable allLogs;
         private readonly DataTable dt;
         private ListView _characterList;
+        private Label _charStats;
 
         public TUI(World world)
         {
@@ -52,11 +53,11 @@ namespace PeopleVille
             _characterList = new()
             {
                 Width = Dim.Percent(30),
-                Height = Dim.Fill(),
+                Height = Dim.Fill() - 10,
                 Source = new ListWrapper<string>(characterNames),
                 SelectedItem = 0
             };
-            _characterList.ValueChanged += (s, e) => ApplyCharacterFilter();
+            _characterList.ValueChanged += (s, e) => { ApplyCharacterFilter(); UpdateCharStats(); };
 
             var dts = new DataTableSource(dt);
 
@@ -73,12 +74,23 @@ namespace PeopleVille
 
             ApplyCharacterFilter();
 
+            _charStats = new Label()
+            {
+                Y = Pos.Bottom(_characterList),
+                Width = Dim.Percent(30),
+                Height = 20,
+                Text = GetCharStatsText()
+            };
+            top.Add(_charStats);
+
             world.globalLogger.LogAdded += logEvent => app.Invoke(() => AppendLog(logEvent));
 
             _ = Task.Run(() => world.manager.StartClock());
 
             app.Run(top);
         }
+
+
 
         private void AppendLog(LogEvent logEvent)
         {
@@ -88,6 +100,7 @@ namespace PeopleVille
             }
             allLogs.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
             ApplyCharacterFilter();
+            UpdateCharStats();
         }
 
         private void ApplyCharacterFilter()
@@ -128,6 +141,29 @@ namespace PeopleVille
             }
 
             RefreshLogView();
+        }
+
+        private void UpdateCharStats()
+        {
+            if (_charStats == null) return;
+            _charStats.Text = GetCharStatsText();
+        }
+
+        private string GetCharStatsText()
+        {
+            int? idx = _characterList?.SelectedItem;
+            if (!idx.HasValue || idx.Value <= 0)
+                return "";
+
+            int personIndex = idx.Value - 1;
+            var people = world.People.OrderBy(x => x.Name).ToList();
+            if (personIndex >= people.Count) return "";
+
+            var p = people[personIndex];
+            var inventoryLines = p.Inventory.Count == 0
+                ? "Ingen items"
+                : string.Join("\n", p.Inventory.Select(i => $"  - {i.Name}"));
+            return $"Navn: {p.Name}\nLiv: {p.Health}\nPenge: {p.Money}\nLokation: {p.CurrentLocation?.Name ?? "Unknown"}\nInventory:\n{inventoryLines}";
         }
 
         private void RefreshLogView()
