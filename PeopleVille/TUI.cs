@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Globalization;
 using PeopleVille.WorldBuilder;
 using Terminal.Gui.App;
 using Terminal.Gui.Drivers;

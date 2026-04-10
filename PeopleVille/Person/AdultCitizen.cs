@@ -66,22 +66,30 @@ namespace PeopleVille.Persons
                         EatFood();
                     }
                     break;
+
                 case 2:
                     //Move location
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
+
                     if (otherLocations.Count > 0)
                         Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
+
                     Log($"Gik hen til {CurrentLocation.Name}");
+                    
                     CurrentLocation.UseLocation(this);
+                    
                     break;
+
                 case 3:
                     try
                     {
                         var items = this.Inventory.Where(x => x is not Gun && x is not Food).ToList();
                         var randomItem = items[RNG.Range(0, items.Count)];
+                      
                         if (randomItem.NeedsTarget())
                         {
                             var peopleAtLocation = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
+                        
                             if (peopleAtLocation.Count == 0)
                                 return;
 
@@ -93,11 +101,13 @@ namespace PeopleVille.Persons
                         {
                             randomItem.Use(this, this);
                         }
-                    } catch
+                    } 
+                    catch
                     {
                         Log($"Brugte ikke nogle items");
                     }
                     break;
+
                 case 4:
                     //Do nothing
                     break;
@@ -107,6 +117,7 @@ namespace PeopleVille.Persons
         private void ShootRandomPerson()
         {
             var peopleAtLocation = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
+
             if (peopleAtLocation.Count == 0)
                 return;
 
