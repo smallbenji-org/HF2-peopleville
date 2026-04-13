@@ -93,12 +93,47 @@ namespace PeopleVille
 
         private void AppendLog(LogEvent logEvent)
         {
-            if (logView == null)
+            if (logView == null || dt == null)
             {
                 return;
             }
+
             allLogs.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
-            ApplyCharacterFilter();
+
+            bool addedToView = false;
+            int? selectedIndex = _characterList?.SelectedItem;
+
+            if (!selectedIndex.HasValue || selectedIndex.Value <= 0)
+            {
+                dt.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
+                addedToView = true;
+            }
+            else
+            {
+                int personIndex = selectedIndex.Value - 1;
+                if (personIndex >= 0 && personIndex < world.People.Count)
+                {
+                    string selectedName = world.People.OrderBy(x => x.Name).ToList()[personIndex].Name;
+                    if (string.Equals(logEvent.Person?.Name, selectedName, StringComparison.Ordinal))
+                    {
+                        dt.Rows.Add(logEvent.EventTime, logEvent.Person?.Name, logEvent.EventText);
+                        addedToView = true;
+                    }
+                }
+            }
+
+            if (addedToView)
+            {
+                bool autoScroll = logView.SelectedRow >= dt.Rows.Count - 2 || dt.Rows.Count <= 1;
+                
+                RefreshLogView();
+                
+                if (autoScroll && dt.Rows.Count > 0)
+                {
+                    logView.SelectedRow = dt.Rows.Count - 1;
+                }
+            }
+
             UpdateCharStats();
         }
 
@@ -119,6 +154,7 @@ namespace PeopleVille
                     dt.ImportRow(row);
                 }
                 RefreshLogView();
+                if (dt.Rows.Count > 0) logView.SelectedRow = dt.Rows.Count - 1;
                 return;
             }
 
@@ -126,6 +162,7 @@ namespace PeopleVille
             if (personIndex < 0 || personIndex >= world.People.Count)
             {
                 RefreshLogView();
+                if (dt.Rows.Count > 0) logView.SelectedRow = dt.Rows.Count - 1;
                 return;
             }
 
@@ -140,6 +177,7 @@ namespace PeopleVille
             }
 
             RefreshLogView();
+            if (dt.Rows.Count > 0) logView.SelectedRow = dt.Rows.Count - 1;
         }
 
         private void UpdateCharStats()
