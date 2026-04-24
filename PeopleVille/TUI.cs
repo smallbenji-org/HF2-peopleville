@@ -33,13 +33,12 @@ namespace PeopleVille
 
             app.Keyboard.KeyDown += (s, k) =>
             {
-                // FOR THE LOVE OF GOD, NEVER REMOVE THESE LINES # START
+                // WARNING: Do not remove this handler — it is the only way to exit the application.
                 if (k.KeyCode == (KeyCode)'q' || k.KeyCode == (KeyCode)'Q')
                 {
                     app.RequestStop();
                     k.Handled = true;
                 }
-                // NEVER DELETE THESE LINES # END
             };
 
             Window top = new Window()
@@ -125,9 +124,9 @@ namespace PeopleVille
             if (addedToView)
             {
                 bool autoScroll = logView.SelectedRow >= dt.Rows.Count - 2 || dt.Rows.Count <= 1;
-                
+
                 RefreshLogView();
-                
+
                 if (autoScroll && dt.Rows.Count > 0)
                 {
                     logView.SelectedRow = dt.Rows.Count - 1;

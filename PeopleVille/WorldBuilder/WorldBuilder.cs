@@ -134,7 +134,6 @@ namespace PeopleVille.WorldBuilder
 
             Assembly assembly = Assembly.LoadFrom(pathToAssembly);
 
-
             var types = assembly.GetTypes().Where(t =>
                 typeof(T).IsAssignableFrom(t) &&
                 !t.IsInterface &&

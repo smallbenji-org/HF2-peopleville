@@ -23,7 +23,6 @@ var modFolder = Path.GetFullPath(
     Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..",
                  "PeopleVille.Extension.Mod1", "bin", "Debug", "net10.0"));
 
-
 var world = new WorldBuilder()
     .AddGameManager()
         .AddEquipment()

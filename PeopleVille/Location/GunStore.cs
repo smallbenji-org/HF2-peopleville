@@ -17,9 +17,6 @@ namespace PeopleVille.Locations
 
         public override void UseLocation(Person person)
         {
-            /*if (person.Inventory.OfType<Gun>().Any())
-                return;*/
-
             if (person.Money >= 800 && person.Inventory.Count < 5)
             {
                 person.Money -= 800;
