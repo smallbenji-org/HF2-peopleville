@@ -33,7 +33,7 @@ namespace PeopleVille
 
             app.Keyboard.KeyDown += (s, k) =>
             {
-                // Allow quitting with 'q' or 'Q'
+                // WARNING: Do not remove this handler — it is the only way to exit the application.
                 if (k.KeyCode == (KeyCode)'q' || k.KeyCode == (KeyCode)'Q')
                 {
                     app.RequestStop();
