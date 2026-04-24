@@ -19,7 +19,6 @@ namespace PeopleVille.Persons
         {
             Manager.TickDone += DoSomething;
 
-
             //ingen lokationer? DØ.
             if (World.Locations.Count == 0)
                 return;
@@ -72,12 +71,12 @@ namespace PeopleVille.Persons
                     var otherLocations = World.Locations.Where(x => x != CurrentLocation).ToList();
 
                     if (otherLocations.Count > 0)
-                        Walk(otherLocations[RNG.ThrowDice(new Die(otherLocations.Count)) - 1]);
+                        Walk(otherLocations[RNG.Range(0, otherLocations.Count)]);
 
                     Log($"Gik hen til {CurrentLocation.Name}");
-                    
+
                     CurrentLocation.UseLocation(this);
-                    
+
                     break;
 
                 case 3:
@@ -85,15 +84,15 @@ namespace PeopleVille.Persons
                     {
                         var items = this.Inventory.Where(x => x is not Gun && x is not Food).ToList();
                         var randomItem = items[RNG.Range(0, items.Count)];
-                      
+
                         if (randomItem.NeedsTarget())
                         {
                             var peopleAtLocation = World.People.Where(x => x != this && x.CurrentLocation == CurrentLocation && !x.Dead).ToList();
-                        
+
                             if (peopleAtLocation.Count == 0)
                                 return;
 
-                            var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
+                            var randomPerson = peopleAtLocation[RNG.Range(0, peopleAtLocation.Count)];
 
                             randomItem.Use(this, randomPerson);
                         }
@@ -101,7 +100,7 @@ namespace PeopleVille.Persons
                         {
                             randomItem.Use(this, this);
                         }
-                    } 
+                    }
                     catch
                     {
                         Log($"Brugte ikke nogle items");
@@ -121,7 +120,7 @@ namespace PeopleVille.Persons
             if (peopleAtLocation.Count == 0)
                 return;
 
-            var randomPerson = peopleAtLocation[RNG.ThrowDice(new Die(peopleAtLocation.Count)) - 1];
+            var randomPerson = peopleAtLocation[RNG.Range(0, peopleAtLocation.Count)];
             var gun = Inventory.OfType<Gun>().First();
             gun.Use(this, randomPerson);
         }
